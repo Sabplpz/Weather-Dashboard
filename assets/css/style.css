@@ -1,0 +1,36 @@
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-image: radial-gradient(circle, #002B5B, #159895);
+    height: 5rem;
+}
+
+h1 {
+    color: white;
+    margin-top: 0.75rem;
+}
+
+#bigcontainer {
+    display: flex;
+}
+
+#search {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+}
+
+.btn {
+    width: 100%;
+    background-color: #57C5B6;
+    border: #57C5B6;
+}
+
+hr {
+    color: black;
+}

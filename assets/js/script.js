@@ -1,11 +1,11 @@
 var APIKey = "7c8cf45d028488694d242f6dad561637";
-var citySearchEL = document.querySelector("#citysearch");
-var submitButtonEl = document.querySelector("submitbtn");
+var citySearchEL = document.querySelector("#city-search");
+var submitButtonEl = document.querySelector("submit-btn");
 
-var convCityToCoor = function(event) {
+function convCityToCoor(event) {
     event.preventDefault();
 
-    var citySearchVal = document.querySelector('#citysearch').value;
+    var citySearchVal = citySearchEL.value.trim();
     console.log(citySearchVal);
 
     if (!citySearchVal) {

@@ -31,10 +31,25 @@ h1 {
     border: #57C5B6;
 }
 
-hr {
-    color: black;
+#all-weather {
+    margin: 2rem;
 }
 
-#todays-weather {
-    margin: 2rem;
+img {
+    width: 70px;
+}
+
+h6 img {
+    width: 50px;
+}
+
+#future-weather {
+    display: flex;
+}
+
+.card {
+    margin: 1rem;
+    padding: 1rem;
+    background-color: #002B5B;
+    color: white;
 }

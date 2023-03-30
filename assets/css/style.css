@@ -34,3 +34,7 @@ h1 {
 hr {
     color: black;
 }
+
+#todays-weather {
+    margin: 2rem;
+}

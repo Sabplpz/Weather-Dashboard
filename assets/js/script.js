@@ -10,23 +10,14 @@ var forecastTitleEl = document.querySelector("#forecast-title");
 // Global variables
 var lat;
 var lon;
-var today = "";
-var count = 0;
+// var today = "";
 // Global array for the search history
-var searchHist = [];
+var searchHist = JSON.parse(localStorage.getItem("city")) || [];
 
-function convCityToCoor(event) {
-    event.preventDefault();
 
-    var citySearchVal = citySearchEl.value.trim();
-    searchHist.unshift(citySearchVal);
+function convCityToCoor(city) {
 
-    if (!citySearchVal) {
-        console.error('You need a search input value!');
-        return;
-    }
-
-    var coordinates = 'https://api.openweathermap.org/geo/1.0/direct?q=' + citySearchVal + '&limit=1&appid=' + APIKey;
+    var coordinates = 'https://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=1&appid=' + APIKey;
 
     fetch(coordinates)
     .then(function (response) {
@@ -38,7 +29,7 @@ function convCityToCoor(event) {
             lat = tempLat.toFixed(2);
             var tempLon = data[0].lon;
             lon = tempLon.toFixed(2);
-            getTodaysWeather();
+            getTodaysWeather(city);
             getFutureWeather();
           });
         } else {
@@ -53,7 +44,7 @@ function convCityToCoor(event) {
 
 }
 
-function getTodaysWeather() {
+function getTodaysWeather(city) {
 
     var weatherCall = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&units=imperial&appid=' + APIKey;
 
@@ -68,7 +59,8 @@ function getTodaysWeather() {
             var humidity = data.list[0].main.humidity;
             var iconCode = data.list[0].weather[0].icon;
             var icon = 'https://openweathermap.org/img/wn/' + iconCode + '@2x.png';
-            displayTodaysWeather(temperature, wind, humidity, icon);
+            todaysWeatherEl.innerHTML = '';
+            displayTodaysWeather(temperature, wind, humidity, icon, city);
           });
         } else {
           alert('Error: ' + response.statusText);
@@ -80,10 +72,9 @@ function getTodaysWeather() {
 
 }
 
-function displayTodaysWeather(temp, wind, hum, icon) {
+function displayTodaysWeather(temp, wind, hum, icon, city) {
 
     var date = dayjs().format('MMM D, YYYY');
-    var city = searchHist[0];
 
     var dateEl = document.createElement('h2');
     var iconEl = document.createElement('img');
@@ -111,6 +102,7 @@ function getFutureWeather() {
     var weatherCall = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&units=imperial&appid=' + APIKey;
 
     var titleEl = document.createElement('h4');
+    forecastTitleEl.innerHTML='';
     titleEl.textContent = '5-Day Forecast:'
     forecastTitleEl.appendChild(titleEl);
 
@@ -120,6 +112,7 @@ function getFutureWeather() {
           console.log(response);
           response.json().then(function (data) {
             console.log(data);
+            futureWeatherEl.innerHTML = '';
             for (var i = 1; i < 6; i++){
                 var temperature = data.list[i].main.temp;
                 var wind = data.list[i].wind.speed;
@@ -170,23 +163,44 @@ function displayFutureWeather(temp, wind, hum, icon, i) {
     
 }
 
-function storeSearchHist() {
 
+function getWeather() {
+  var city = this.getAttribute("data-city");
+  convCityToCoor(city);
 }
 
-function displaySearchHistory() {
+ function displaySearchHistory() {
 
-    count++;
-    var buttonEl = document.createElement('button');
+    citiesListEl.innerHTML = '';
+    for (var i = 0; i < searchHist.length; i++){
+        var buttonEl = document.createElement('button');
         buttonEl.classList = 'btn btn-secondary';
         buttonEl.setAttribute('type', 'button');
-        buttonEl.textContent = searchHist[count];
+        buttonEl.textContent = searchHist[i];
+        buttonEl.setAttribute("data-city", searchHist[i]);
+        buttonEl.onclick = getWeather;
         citiesListEl.appendChild(buttonEl);
-    
-
-}
-
+    }
+} 
 
 
-submitButtonEl.addEventListener("click", convCityToCoor);
+
+displaySearchHistory();
+
+submitButtonEl.addEventListener("click", function(e){
+  e.preventDefault();
+  searchHist = JSON.parse(localStorage.getItem("city")) || [];
+
+    var citySearchVal = citySearchEl.value.trim();
+    searchHist.unshift(citySearchVal);
+
+    localStorage.setItem("city", JSON.stringify(searchHist));
+
+    if (!citySearchVal) {
+        console.error('You need a search input value!');
+        return;
+    }
+
+    convCityToCoor(citySearchVal);
+})
 

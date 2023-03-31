@@ -1,52 +1,64 @@
+/* styling for the whoel body */
 body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+/* styling for the top header, include the radient */
 header {
     width: 100%;
     display: flex;
     justify-content: center;
+    /* Radient colors */
     background-image: radial-gradient(circle, #002B5B, #159895);
     height: 5rem;
 }
 
+/* Color and margin for the header text */
 h1 {
     color: white;
     margin-top: 0.75rem;
 }
 
+/* Flexbox for the big container */
 #bigcontainer {
     display: flex;
 }
 
+/* Flexbox for the search side */
 #search {
     display: flex;
     flex-direction: column;
     margin: 2rem;
 }
 
+/* Styling for the buttons */
 .btn {
     width: 100%;
     background-color: #57C5B6;
     border: #57C5B6;
 }
 
+/* Margin for the all weather container */
 #all-weather {
     margin: 2rem;
 }
 
+/* Image size for todays weather */
 img {
     width: 70px;
 }
 
+/*  Image size for the future weather */
 h6 img {
     width: 50px;
 }
 
+/* Flexbox for the future weather */
 #future-weather {
     display: flex;
 }
 
+/* Styling for the future weather cards */
 .card {
     margin: 1rem;
     padding: 1rem;

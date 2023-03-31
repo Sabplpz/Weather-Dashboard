@@ -22,4 +22,4 @@ MIT License
 
 ## Links
 
-deployed site: 
+Deployed site: https://sabplpz.github.io/Challenge-07/

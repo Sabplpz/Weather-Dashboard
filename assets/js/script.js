@@ -208,7 +208,7 @@ function getWeather() {
     citiesListEl.innerHTML = '';
 
     // Iteration to create the whole array of search history, limited to 5 so that the website won't load too many
-    for (var i = 0; i < 5; i++){
+    for (var i = 0; i < searchHist.length; i++){
         var buttonEl = document.createElement('button');
         buttonEl.classList = 'btn btn-secondary';
         buttonEl.setAttribute('type', 'button');

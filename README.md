@@ -1,4 +1,4 @@
-# Challenge 07 - Weather Dashboard
+# Weather Dashboard
 
 ## Description
 
@@ -22,4 +22,4 @@ MIT License
 
 ## Links
 
-Deployed site: https://sabplpz.github.io/Challenge-07/
+Deployed site: https://sabplpz.github.io/Weather-Dashboard/
